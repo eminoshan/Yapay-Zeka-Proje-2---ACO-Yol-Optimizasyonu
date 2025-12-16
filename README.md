@@ -19,7 +19,7 @@ Isparta Uygulamalı Bilimler Üniversitesi (SDÜ) kampüsü içinde, otobüs sef
 
 ```
 Proje2_Karinca/
-├── main.py                    # ⭐ Streamlit ana uygulaması
+├── main.py                    #  Streamlit ana uygulaması
 ├── config.py                  # ACO parametreleri ve konfigürasyon
 ├── requirements.txt           # Python paket bağımlılıkları
 ├── README.md                  # Bu dosya
@@ -27,15 +27,15 @@ Proje2_Karinca/
 ├── .env.example               # Ortam değişkenleri örneği
 │
 ├── data/
-│   └── coordinates.py         # 📍 SDÜ Kampüsü 10 durak koordinatları
+│   └── coordinates.py         #  SDÜ Kampüsü 10 durak koordinatları
 │
 ├── core/
-│   ├── ant_algorithm.py       # 🐜 ACO Algoritması (AntColonyOptimizer sınıfı)
-│   ├── haversine.py           # 📐 Haversine formülü ile mesafe hesaplama
-│   └── matrix_utils.py        # 🔧 Distance Matrix API entegrasyonu
+│   ├── ant_algorithm.py       #  ACO Algoritması (AntColonyOptimizer sınıfı)
+│   ├── haversine.py           #  Haversine formülü ile mesafe hesaplama
+│   └── matrix_utils.py        #  Distance Matrix API entegrasyonu
 │
 ├── visual/
-│   └── plotting.py            # 📊 Grafik ve KML görselleştirmesi
+│   └── plotting.py            #  Grafik ve KML görselleştirmesi
 │
 ├── .streamlit/
 │   └── secrets.example.toml   # Streamlit API Key yapısı
@@ -233,3 +233,4 @@ SDÜ Kampüsü'ndeki 10 durak:
 ## 📝 Lisans
 
 Bu proje eğitim amacıyla oluşturulmuştur.
+
