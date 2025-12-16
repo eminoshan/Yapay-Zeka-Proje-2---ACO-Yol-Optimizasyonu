@@ -1,5 +1,5 @@
 """
-🚌 SDÜ Kampüs Ring Seferi Optimizasyonu - Streamlit Uygulaması
+ SDÜ Kampüs Ring Seferi Optimizasyonu - Streamlit Uygulaması
 
 Karınca Kolonisi Algoritması (ACO) ile Isparta Uygulamalı Bilimler Üniversitesi
 kampüsü içindeki 10 durakta ring seferi yapan otobüsün rotasını optimize eder.
@@ -34,7 +34,7 @@ st.set_page_config(
 # ============================================
 # SOL PANEL - BİLGİLER
 # ============================================
-st.sidebar.title("📚 Proje Bilgileri")
+st.sidebar.title(" Proje Bilgileri")
 st.sidebar.info(
     f"**Adı Soyadı:** {PROJECT_INFO['student_name']}\n\n"
     f"**Okul No:** {PROJECT_INFO['student_id']}\n\n"
@@ -43,7 +43,7 @@ st.sidebar.info(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 🔑 API Ayarları")
+st.sidebar.markdown("###  API Ayarları")
 
 # Secrets'ten API Key'i oku (yoksa input'tan)
 try:
@@ -81,7 +81,7 @@ duraklar = CAMPUS_STOPS
 df_duraklar = pd.DataFrame.from_dict(duraklar, orient='index', columns=['lat', 'lon'])
 df_duraklar['isim'] = list(duraklar.keys())
 
-st.sidebar.success(f"✅ Toplam Durak Sayısı: {len(duraklar)}")
+st.sidebar.success(f"Toplam Durak Sayısı: {len(duraklar)}")
 
 # ============================================
 # KONTROLLER - PARAMETRELER
@@ -152,13 +152,13 @@ st.markdown("---")
 col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
 
 with col_btn1:
-    calculate_btn = st.button("🚀 Rotayı Hesapla", use_container_width=True)
+    calculate_btn = st.button(" Rotayı Hesapla", use_container_width=True)
 
 with col_btn2:
-    clear_btn = st.button("🔄 Temizle", use_container_width=True)
+    clear_btn = st.button(" Temizle", use_container_width=True)
 
 with col_btn3:
-    download_btn = st.button("💾 Sonuçları İndir", use_container_width=True)
+    download_btn = st.button(" Sonuçları İndir", use_container_width=True)
 
 # Başlangıç düğümünü seç
 start_node = list(duraklar.keys()).index(start_stop)
@@ -173,7 +173,7 @@ if calculate_btn:
     
     # Durakları kontrol et
     if len(duraklar) != 10:
-        st.warning(f"⚠️ Uyarı: {len(duraklar)} durak var, 10 olması gerekiyor!")
+        st.warning(f" Uyarı: {len(duraklar)} durak var, 10 olması gerekiyor!")
     
     # ACO Optimizer'ı oluştur
     optimizer = AntColonyOptimizer(
@@ -194,51 +194,51 @@ if calculate_btn:
         status_text.text(f"İterasyon {current}/{total} - En İyi: {best_dist/1000:.2f} km")
     
     # Algoritma çalış
-    with st.spinner("🔄 Karınca Kolonisi Algoritması Çalışıyor..."):
+    with st.spinner(" Karınca Kolonisi Algoritması Çalışıyor..."):
         path_indices, min_dist, best_distances, avg_distances = optimizer.solve(
             start_node=start_node,
             progress_callback=progress_callback
         )
     
-    # ✅ BAŞARILI SONUÇ
-    st.success(f"✅ Optimum Rota Bulundu!")
+    #  BAŞARILI SONUÇ
+    st.success(f" Optimum Rota Bulundu!")
     
-    # 📊 Ana Metrikler
+    #  Ana Metrikler
     col_metric1, col_metric2, col_metric3, col_metric4 = st.columns(4)
     
     with col_metric1:
-        st.metric("📏 Toplam Mesafe", f"{min_dist/1000:.2f} km", f"{min_dist:.0f} m")
+        st.metric(" Toplam Mesafe", f"{min_dist/1000:.2f} km", f"{min_dist:.0f} m")
     
     with col_metric2:
         num_stops = len([x for x in path_indices if x != path_indices[0]])
-        st.metric("🚏 Durak Sayısı", num_stops, f"{len(duraklar)} hepsini ziyaret")
+        st.metric(" Durak Sayısı", num_stops, f"{len(duraklar)} hepsini ziyaret")
     
     with col_metric3:
         avg_stop_dist = (min_dist / num_stops) if num_stops > 0 else 0
-        st.metric("📍 Ort. Durak Arası", f"{avg_stop_dist/1000:.2f} km", f"{avg_stop_dist:.0f} m")
+        st.metric(" Ort. Durak Arası", f"{avg_stop_dist/1000:.2f} km", f"{avg_stop_dist:.0f} m")
     
     with col_metric4:
-        st.metric("🐜 Çalışan Algoritma", "ACO", f"{n_ants} karınca")
+        st.metric(" Çalışan Algoritma", "ACO", f"{n_ants} karınca")
     
     st.markdown("---")
     
-    # 📈 Grafikler
+    #  Grafikler
     col_graph1, col_graph2 = st.columns(2)
     
     with col_graph1:
-        st.write("### 📈 Yakınsama Analizi")
+        st.write("### Yakınsama Analizi")
         fig1 = plot_convergence(best_distances, avg_distances)
         st.pyplot(fig1, use_container_width=True)
     
     with col_graph2:
-        st.write("### 🗺️ Optimum Rota Haritası")
+        st.write("###  Optimum Rota Haritası")
         fig2 = plot_route(names, path_indices, coords)
         st.pyplot(fig2, use_container_width=True)
     
     st.markdown("---")
     
     # 📋 Detaylı Rota Tablosu
-    st.write("### 📋 Detaylı Rota Tablosu")
+    st.write("###  Detaylı Rota Tablosu")
     
     rota_data = []
     for idx, node_idx in enumerate(path_indices):
@@ -262,16 +262,16 @@ if calculate_btn:
     df_rota = pd.DataFrame(rota_data)
     st.dataframe(df_rota, use_container_width=True, hide_index=True)
     
-    # 📝 Rota Özeti
-    st.write("### 📝 Rota Özeti")
+    # Rota Özeti
+    st.write("###  Rota Özeti")
     rota_str = " → ".join([f"[{idx+1}] {names[i].split('. ')[1]}" for idx, i in enumerate(path_indices)])
     
     st.info(f"**Takip Edilecek Rota (Sırasıyla):**\n\n{rota_str}")
     
     st.markdown("---")
     
-    # 💾 İndir Seçenekleri
-    st.write("### 💾 Sonuçları İndir")
+    #  İndir Seçenekleri
+    st.write("###  Sonuçları İndir")
     
     col_down1, col_down2 = st.columns(2)
     
@@ -279,7 +279,7 @@ if calculate_btn:
         # CSV İndir
         csv_data = df_rota.to_csv(index=False, encoding='utf-8')
         st.download_button(
-            label="📥 Rotayı CSV Olarak İndir",
+            label=" Rotayı CSV Olarak İndir",
             data=csv_data,
             file_name="kampus_ring_seferi_rota.csv",
             mime="text/csv"
@@ -289,11 +289,12 @@ if calculate_btn:
         # KML İndir
         kml_data = generate_kml(names, path_indices, coords)
         st.download_button(
-            label="📥 Rotayı KML Olarak İndir (Google Earth)",
+            label=" Rotayı KML Olarak İndir (Google Earth)",
             data=kml_data,
             file_name="kampus_ring_seferi_rota.kml",
             mime="application/vnd.google-earth.kml+xml"
         )
 
 elif clear_btn:
-    st.info("🔄 Sonuçlar temizlendi. Tekrar hesaplamak için 'Rotayı Hesapla' butonuna basın.")
+    st.info(" Sonuçlar temizlendi. Tekrar hesaplamak için 'Rotayı Hesapla' butonuna basın.")
+
